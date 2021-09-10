@@ -1,5 +1,5 @@
 # tune-in
-A radio for $TUNE songs from the etherium blockchain. 
+A radio for $TUNE songs from the ethereum blockchain. 
 
 ## Vision
 A pirate radio exclusive to $TUNE nft owners. Listen to other songs created by artists for their own $TUNE.
