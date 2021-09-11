@@ -17,3 +17,26 @@ A pirate radio exclusive to $TUNE nft owners. Listen to other songs created by a
 @sudo
 - TUNES metadata could have a link for the song in Sound Cloud or Spotify.
 - Soundcloud links would be a great since we could stream them via api, and have an MVP. 
+
+## @donaldbough thoughts for MVP
+* MVP
+    * Restrict website access based on tunes owner
+        * every page has to redirect before running scripts
+    * play the song url associated with a tunes nft.
+        * Only play sound cloud songs to start.
+        * best and prettiest media player library is amplitude js: https://521dimensions.com/open-source/amplitudejs
+        * show album cover in media player
+            * This comes from tunes meta data
+        * show part of ipfs link
+        * show owner
+    * player can shuffle to next tunes that has a song
+    * tune owner can edit their tune's song_uri to a Soundcloud url
+        * upload button has instructions explaining only sound cloud urls will play in the media player
+        * input for Soundcloud url
+        * upload button edits the actual tune's meta data
+        * multiple uploads for the same song should just edit the existing meta data
+* After MVP
+    * Gallery of album art
+    * Upvoting on songs
+        * Page of best voted songs
+    * ? (wait for suggestions from community)
