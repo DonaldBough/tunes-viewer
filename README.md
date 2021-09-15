@@ -4,6 +4,13 @@ A radio for $TUNE songs from the ethereum blockchain.
 ## Vision
 A pirate radio exclusive to $TUNE nft owners. Listen to other songs created by artists for their own $TUNE.
 
+## Making Changes
+Project is using plain vanilla JS, bootstrap, Sentry.io (error monitoring), font awesome, and firebase. 
+
+To run the project, `cd` to the `public` folder, and run `npm run local` to have firebase run a local web server for you on port 5000 (localhost:5000)
+
+To deploy changes to the live website, make sure you're in the public folder like before and run `npm run deploy`
+
 ## Implementation Ideas 
 @aeolus
 - As an initial MVP, only log in with metamask for people who own a tune NFT. 
