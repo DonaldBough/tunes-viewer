@@ -26,6 +26,12 @@ To deploy changes to the live website, make sure you're in the public folder lik
 - TUNES metadata could have a link for the song in Sound Cloud or Spotify.
 - Soundcloud links would be a great since we could stream them via api, and have an MVP. 
 
+@0xAd1
+- Can be maintained as a platform to view all possible derivates of the TUNES
+- Users which have official metadata alias reserved by the team can contact, get their aliases added
+- All sorts of artworks, songs, lyrics for a token visible on a single page
+- If a derivative allows an owner to set their own metadata, we can have metamask connection which allows user to do so
+
 ## @donaldbough thoughts for MVP
 * MVP
     * play the song url associated with a tunes nft.
