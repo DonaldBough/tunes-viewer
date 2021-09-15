@@ -13,6 +13,7 @@ A pirate radio exclusive to $TUNE nft owners. Listen to other songs created by a
 @donaldbough
 - Actual radio station website hosted from a regular web2 web server (firebase hosting's easy + generous free layer).
 - Need to look into IPFS media player libraries to play the song in our radio station website.
+- UI should feel exclusive & high end
 
 @sudo
 - TUNES metadata could have a link for the song in Sound Cloud or Spotify.
@@ -20,8 +21,6 @@ A pirate radio exclusive to $TUNE nft owners. Listen to other songs created by a
 
 ## @donaldbough thoughts for MVP
 * MVP
-    * Restrict website access based on tunes owner
-        * every page has to redirect before running scripts
     * play the song url associated with a tunes nft.
         * Only play sound cloud songs to start.
         * best and prettiest media player library is amplitude js: https://521dimensions.com/open-source/amplitudejs
