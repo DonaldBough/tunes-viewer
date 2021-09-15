@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tunes Viewer</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+  <!-- Font awesome icons -->
+  <script src="https://kit.fontawesome.com/56c3afa462.js" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="style/main.css" type="text/css"/>
+</head>
+<body>
+
+  <div class="container-fluid text-center">
+    <h1>Tunes Viewer</h1>
+    <div>
+      <p>
+        Experience all of your TUNE in one place.
+      </p>
+    </div>
+  </div>
+
+<!-- Sentry error monitoring  -->
+<!--<script-->
+<!--    src="https://browser.sentry-cdn.com/6.12.0/bundle.min.js"-->
+<!--    integrity="sha384-S3qfdh3AsT1UN84WIYNuOX9vVOoFg3nB17Jp5/pTFGDBGBt+dtz7MGAV845efkZr"-->
+<!--    crossorigin="anonymous"-->
+<!--&gt;</script>-->
+
+<!--<script src="src/init-sentry.js"></script>-->
+
+<!-- update the version number as needed -->
+<script defer src="/__/firebase/8.8.1/firebase-app.js"></script>
+
+<!-- initialize the SDK after all desired features are loaded -->
+<script defer src="/__/firebase/init.js"></script>
+
+<script type="module">
+  import IndexPage from "./src/index.js";
+
+  new IndexPage().start();
+</script>
+
+<!-- Bootstrap js libs -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+</body>
+</html>
