@@ -31,6 +31,8 @@ To deploy changes to the live website, make sure you're in the public folder lik
 - Users which have official metadata alias reserved by the team can contact, get their aliases added
 - All sorts of artworks, songs, lyrics for a token visible on a single page
 - If a derivative allows an owner to set their own metadata, we can have metamask connection which allows user to do so
+- Allow the derivative owner to claim the derivative using metamask transaction
+
 
 ## @donaldbough thoughts for MVP
 * MVP

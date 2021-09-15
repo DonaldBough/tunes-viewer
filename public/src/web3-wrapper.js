@@ -24,11 +24,16 @@ export default class Web3Wrapper {
     return null;
   }
 
+  async getTuneIDOwner(tuneId) {
+    let tuneOwner = await this.tunesContract.ownerOf(tuneId);
+    return tuneOwner;
+  }
+
   async getTune(tuneId) {
 
     console.log(ethers);  
 
-    let tuneOwner = await this.tunesContract.ownerOf(tuneId);
+    let tuneOwner = await this.getTuneIDOwner(tuneId);
 
     let tuneOfficialMetadata = await this.tunesContract.tokenURI(tuneId)
 
