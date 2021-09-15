@@ -13,6 +13,8 @@
 
   <!-- Amplitude JS Music playing library  -->
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/amplitudejs@5.3.2/dist/amplitude.js"></script>
+  <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js"
+  type="application/javascript"></script>
   <!-- Amplitude JS Music Player CSS  -->
   <link rel="stylesheet" href="style/amplitude-js.css" type="text/css"/>
 
@@ -86,7 +88,7 @@
       <div class="card bottom-shadow">
         <div class="card-body mx-5">
           <h2>
-            Owned by <span data-amplitude-song-info="artist"></span>
+            Owned by <a href="ownerUrl"><span data-amplitude-song-info="owner"></span></a>
           </h2>
 
           <div class="mt-5">
