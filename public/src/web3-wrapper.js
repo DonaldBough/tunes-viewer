@@ -30,9 +30,6 @@ export default class Web3Wrapper {
   }
 
   async getTune(tuneId) {
-
-    console.log(ethers);  
-
     let tuneOwner = await this.getTuneIDOwner(tuneId);
 
     let tuneOfficialMetadata = await this.tunesContract.tokenURI(tuneId)
@@ -51,7 +48,8 @@ export default class Web3Wrapper {
       "artist": "TODO",
       "album": "Tunes",
       "url": "./your-tears-breed-cold-flurries-song",
-      "cover_art_url": json.image
+      "cover_art_url": json.image,
+      "id": tuneId,
     }
   }
 

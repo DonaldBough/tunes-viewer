@@ -23,33 +23,47 @@
   <link rel="stylesheet" href="style/dark-mode.css" type="text/css"/>
 </head>
 <body>
-<div class="row ml-3 mt-0">
-  <div class="col-6">
-    <span>
-      <img class="mr-3" src="./img/tunes-logo.png" alt="" width="85" style="border-radius:100%;border:3px solid #fff;margin-top:1rem" data-v-f7f37376="">
-
-      <span class="h1 text-h2 font-weight-bold" style="color: rgb(255, 255, 255); margin-top: 1rem; --darkreader-inline-color:#fffdfa;" data-v-f7f37376="" data-darkreader-inline-color="">
+<nav class="row ml-3 mt-3">
+  <div class="col-1 pr-0">
+    <a href="index.html">
+      <img class="mr-3 float-right" src="./img/tunes-logo.png" alt="" width="85px" style="border-radius:100%; border:3px solid #fff; margin-top:1rem;">
+    </a>
+  </div>
+  <div class="col-3 pl-0" style="margin-top: 2rem;">
+    <a href="index.html">
+      <span class="h1 text-h2 font-weight-bold" style="color: rgb(255, 255, 255); margin-top: 1rem;">
         TUNES
         <span>
-          <span class="h3 font-weight-light" style="color: rgb(255, 255, 255); letter-spacing: 8px; --darkreader-inline-color:#fffdfa;" data-v-f7f37376="" data-darkreader-inline-color="">
+          <span class="h3 font-weight-light" style="color: rgb(255, 255, 255); letter-spacing: 8px;">
             PROJECT
           </span>
         </span>
       </span>
-    </span>
+    </a>
   </div>
-</div>
+</nav>
 
 <div class="container mt-0" style="margin-bottom: 5rem;">
   <div class="row mt-0">
     <div class="offset-4 col-4">
-      <img class="img-fluid glow" data-amplitude-song-info="cover_art_url"/>
+
+      <div id="albumCoverSpinnerContainer" style="height: 500px;">
+        <div class="row align-items-center mt-0 h-100">
+          <div class="col text-center">
+            <div class="spinner-border spinner-border-lg text-primary" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <img class="img-fluid glow" data-amplitude-song-info="cover_art_url" style="display: none;"/>
     </div>
   </div>
 
   <div class="row">
     <div class="col text-center">
-      <h1 data-amplitude-song-info="name" class="song-name" style="font-weight: 700"></h1>
+      <h1 data-amplitude-song-info="name" class="song-name" style="font-weight: 700">Loading...</h1>
     </div>
   </div>
 
@@ -85,17 +99,17 @@
 
   <div class="row">
     <div class="col">
-      <div class="card bottom-shadow">
+      <div class="card glow-shadow">
         <div class="card-body mx-5">
           <h2>
-            Owned by <a href="ownerUrl"><span data-amplitude-song-info="owner"></span></a>
+            <span class="text-secondary">Owned by</span> <span data-amplitude-song-info="owner"></span>
           </h2>
 
           <div class="mt-5">
-            Audio
+            <span class="text-secondary">Audio link</span>
             <span>
               <i class="fas fa-link"></i>
-              <span class="font-italic text-secondary" data-amplitude-song-info="url"></span>
+              <span class="font-italic" data-amplitude-song-info="url"></span>
             </span>
           </div>
 
@@ -125,9 +139,9 @@
 <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
 
 <script type="module">
-  import IndexPage from "./src/index.js";
+  import TunePage from "./src/tune-page.js";
 
-  new IndexPage().start();
+  new TunePage().start();
 </script>
 
 <!-- Bootstrap js libs -->

@@ -5,7 +5,7 @@
   "main": "index.html",
   "scripts": {
     "local": "firebase emulators:start --only hosting",
-    "live-deploy": "firebase deploy --only hosting"
+    "deploy": "firebase deploy --only hosting"
   },
   "author": "",
   "license": "ISC"

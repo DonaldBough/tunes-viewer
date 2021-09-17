@@ -11,17 +11,106 @@
   <!-- Font awesome icons -->
   <script src="https://kit.fontawesome.com/56c3afa462.js" crossorigin="anonymous"></script>
 
+  <!-- Amplitude JS Music playing library  -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/amplitudejs@5.3.2/dist/amplitude.js"></script>
+  <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js"
+          type="application/javascript"></script>
+  <!-- Amplitude JS Music Player CSS  -->
+  <link rel="stylesheet" href="style/amplitude-js.css" type="text/css"/>
+
   <link rel="stylesheet" href="style/main.css" type="text/css"/>
+
+  <link rel="stylesheet" href="style/dark-mode-generated.css" type="text/css"/>
+  <link rel="stylesheet" href="style/dark-mode-customizations.css" type="text/css"/>
 </head>
 <body>
+  <nav class="navbar-expand-lg">
+    <div class="row mt-3">
+      <div class="col-4 col-lg-1 pr-0 ml-3">
+        <a href="index.html">
+          <img class="mr-3 float-right" src="./img/tunes-logo.png" alt="" width="85px" style="border-radius:100%; border:3px solid #fff; margin-top:1rem;">
+        </a>
+      </div>
 
-  <div class="container-fluid text-center">
-    <h1>Tunes Viewer</h1>
-    <div>
-      <p>
-        Experience all of your TUNE in one place.
-      </p>
+      <div class="col-3 pl-0" style="margin-top: 2rem;">
+        <a href="index.html">
+        <span class="h1 font-weight-bold" style="color: rgb(255, 255, 255); margin-top: 1rem;">
+          TUNES
+          <span>
+            <span class="h3 font-weight-light" style="color: rgb(255, 255, 255); letter-spacing: 8px;">
+              PROJECT
+            </span>
+          </span>
+        </span>
+        </a>
+      </div>
+
+      <div class="col-5 col-lg-7" style="margin-top: 2.5rem;">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="btn btn-primary btn-lg gradient-button">
+                View Your Tunes
+              </a>
+            </li>
+          </ul>
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control form-control-lg mr-sm-2" type="search" placeholder="Search by tune id" aria-label="Search" style="border-radius: 1rem;">
+          </form>
+        </div>
+      </div>
+
     </div>
+  </nav>
+
+  <div class="container mt-0" style="margin-bottom: 3rem;">
+    <div class="row">
+      <div class="col">
+        <div class="jumbotron glow-shadow" style="border-radius: 3rem;">
+          <div class="container-fluid">
+            <div class="row mt-0 ml-3">
+              <h1 style="font-weight: 900; font-size: 5rem; font-style: italic">Tunes Viewer</h1>
+              <h4 style="font-style: italic">
+                the best way to experience all art, music, and other creations associated with a tune
+              </h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="albumContainer" class="row" style="margin-left: 5rem;">
+      <img class="mr-5 mb-5" src="img/tunes-logo.png" width="200px">
+      <img class="mr-5 mb-5" src="img/tunes-logo.png" width="200px">
+      <img class="mr-5 mb-5" src="img/tunes-logo.png" width="200px">
+      <img class="mr-5 mb-5" src="img/tunes-logo.png" width="200px">
+      <img class="mr-5 mb-5" src="img/tunes-logo.png" width="200px">
+      <img class="mr-5 mb-5" src="img/tunes-logo.png" width="200px">
+      <img class="mr-5 mb-5" src="img/tunes-logo.png" width="200px">
+      <img class="mr-5 mb-5" src="img/tunes-logo.png" width="200px">
+      <img class="mr-5 mb-5" src="img/tunes-logo.png" width="200px">
+      <img class="mr-5 mb-5" src="img/tunes-logo.png" width="200px">
+      <img class="mr-5 mb-5" src="img/tunes-logo.png" width="200px">
+      <img class="mr-5 mb-5" src="img/tunes-logo.png" width="200px">
+    </div>
+
+    <hr/>
+
+    <div class="row">
+      <div class="col text-center">
+        <h4 style="font-weight: 900; font-style: italic">
+          Refresh to see more random tunes
+        </h4>
+      </div>
+    </div>
+
   </div>
 
 <!-- Sentry error monitoring  -->
@@ -39,8 +128,11 @@
 <!-- initialize the SDK after all desired features are loaded -->
 <script defer src="/__/firebase/init.js"></script>
 
+<!-- web3 -->
+<script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+
 <script type="module">
-  import IndexPage from "./src/index.js";
+  import IndexPage from "./src/index-page.js";
 
   new IndexPage().start();
 </script>
