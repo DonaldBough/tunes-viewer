@@ -23,7 +23,8 @@
   <link rel="stylesheet" href="style/dark-mode-generated.css" type="text/css"/>
   <link rel="stylesheet" href="style/dark-mode-customizations.css" type="text/css"/>
 </head>
-<body>
+
+<body class="fade-in" onload="document.body.style.opacity='1'">
 <nav class="row ml-3 mt-3">
   <div class="col-1 pr-0">
     <a href="index.html">
@@ -47,18 +48,7 @@
 <div class="container mt-0" style="margin-bottom: 5rem;">
   <div class="row mt-0">
     <div class="offset-4 col-4">
-
-      <div id="albumCoverSpinnerContainer" style="height: 500px;">
-        <div class="row align-items-center mt-0 h-100">
-          <div class="col text-center">
-            <div class="spinner-border spinner-border-lg text-primary" role="status">
-              <span class="sr-only">Loading...</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <img class="img-fluid glow" data-amplitude-song-info="cover_art_url" style="display: none;"/>
+      <img class="img-fluid" data-amplitude-song-info="cover_art_url" src="./img/tunes-logo.png" alt=""/>
     </div>
   </div>
 

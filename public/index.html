@@ -23,57 +23,62 @@
   <link rel="stylesheet" href="style/dark-mode-generated.css" type="text/css"/>
   <link rel="stylesheet" href="style/dark-mode-customizations.css" type="text/css"/>
 </head>
-<body>
-  <nav class="navbar-expand-lg">
-    <div class="row mt-3">
-      <div class="col-4 col-lg-1 pr-0 ml-3">
-        <a href="index.html">
-          <img class="mr-3 float-right" src="./img/tunes-logo.png" alt="" width="85px" style="border-radius:100%; border:3px solid #fff; margin-top:1rem;">
-        </a>
-      </div>
 
-      <div class="col-3 pl-0" style="margin-top: 2rem;">
-        <a href="index.html">
-        <span class="h1 font-weight-bold" style="color: rgb(255, 255, 255); margin-top: 1rem;">
-          TUNES
-          <span>
-            <span class="h3 font-weight-light" style="color: rgb(255, 255, 255); letter-spacing: 8px;">
+<body class="fade-in" onload="document.body.style.opacity='1'; document.getElementById('jumbotron').style.opacity='1'">
+  <div class="container mt-0" style="margin-bottom: 3rem;">
+    <nav class="navbar-expand-lg">
+      <div class="row mt-3">
+        <div class="col-4 col-lg-1 px-0">
+          <a href="index.html">
+            <img class="float-right" src="./img/tunes-logo.png" alt="" width="85px" style="border-radius:100%; border:3px solid #fff; margin-top:1rem;">
+          </a>
+        </div>
+
+        <div class="col-4" style="margin-top: 2rem;">
+          <a href="index.html">
+            <span class="h1 font-weight-bold" style="color: rgb(255, 255, 255);">
+              TUNES
+            </span>
+            <span class="h3 font-weight-light mb-5" style="color: rgb(255, 255, 255); letter-spacing: 8px;">
               PROJECT
             </span>
-          </span>
-        </span>
-        </a>
-      </div>
-
-      <div class="col-5 col-lg-7" style="margin-top: 2.5rem;">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="btn btn-primary btn-lg gradient-button">
-                View Your Tunes
-              </a>
-            </li>
-          </ul>
-          <form class="form-inline my-2 my-lg-0">
-            <input class="form-control form-control-lg mr-sm-2" type="search" placeholder="Search by tune id" aria-label="Search" style="border-radius: 1rem;">
-          </form>
+          </a>
         </div>
+
+        <div class="col-5 col-lg-7 ml-auto" style="margin-top: 1rem;">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a id="viewOwnersTunesButton" class="btn btn-lg btn-primary gradient-button">
+                  View Your Tunes
+                </a>
+              </li>
+            </ul>
+
+            <h4 class="px-4 mt-1" style="font-style: italic; font-weight: 700;">OR</h4>
+
+            <form id="searchTuneIdForm" class="input-group form-inline w-auto my-0 py-4">
+              <input id="searchTuneIdInput" class="form-control form-control-lg pr-0" type="search" placeholder="Search by tune id"
+                     aria-label="Search" style="border-radius: 2rem 0 0 2rem;">
+              <div class="input-group-append">
+                <button id="searchTuneIdButton" type="submit" class="btn btn-primary gradient-button pl-3 pr-4" style="font-size: 20px; border-radius: 0 2rem 2rem 0;">
+                  Go
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
       </div>
+    </nav>
 
-    </div>
-  </nav>
-
-  <div class="container mt-0" style="margin-bottom: 3rem;">
     <div class="row">
       <div class="col">
-        <div class="jumbotron glow-shadow" style="border-radius: 3rem;">
+        <div id="jumbotron" class="jumbotron glow-shadow fade-in-slower" style="border-radius: 3rem;">
           <div class="container-fluid">
             <div class="row mt-0 ml-3">
               <h1 style="font-weight: 900; font-size: 5rem; font-style: italic">Tunes Viewer</h1>
@@ -86,19 +91,79 @@
       </div>
     </div>
 
-    <div id="albumContainer" class="row" style="margin-left: 5rem;">
-      <img class="mr-5 mb-5" src="img/tunes-logo.png" width="200px">
-      <img class="mr-5 mb-5" src="img/tunes-logo.png" width="200px">
-      <img class="mr-5 mb-5" src="img/tunes-logo.png" width="200px">
-      <img class="mr-5 mb-5" src="img/tunes-logo.png" width="200px">
-      <img class="mr-5 mb-5" src="img/tunes-logo.png" width="200px">
-      <img class="mr-5 mb-5" src="img/tunes-logo.png" width="200px">
-      <img class="mr-5 mb-5" src="img/tunes-logo.png" width="200px">
-      <img class="mr-5 mb-5" src="img/tunes-logo.png" width="200px">
-      <img class="mr-5 mb-5" src="img/tunes-logo.png" width="200px">
-      <img class="mr-5 mb-5" src="img/tunes-logo.png" width="200px">
-      <img class="mr-5 mb-5" src="img/tunes-logo.png" width="200px">
-      <img class="mr-5 mb-5" src="img/tunes-logo.png" width="200px">
+    <div id="albumContainer" class="row ml-5">
+      <span class="ml-4 mr-lg-5 mb-5 text-center" style="max-width: 220px">
+        <a href="">
+          <img src=img/tunes-logo.png width="220px" alt="">
+        </a>
+        <p class="mb-0 mt-2">loading...</p>
+      </span>
+      <span class="ml-4 mr-lg-5 mb-5 text-center" style="max-width: 220px">
+        <a href="">
+          <img src=img/tunes-logo.png width="220px" alt="">
+        </a>
+        <p class="mb-0 mt-2">loading...</p>
+      </span>
+      <span class="ml-4 mr-lg-5 mb-5 text-center" style="max-width: 220px">
+        <a href="">
+          <img src=img/tunes-logo.png width="220px" alt="">
+        </a>
+        <p class="mb-0 mt-2">loading...</p>
+      </span>
+      <span class="ml-4 mr-lg-5 mb-5 text-center" style="max-width: 220px">
+        <a href="">
+          <img src=img/tunes-logo.png width="220px" alt="">
+        </a>
+        <p class="mb-0 mt-2">loading...</p>
+      </span>
+      <span class="ml-4 mr-lg-5 mb-5 text-center" style="max-width: 220px">
+        <a href="">
+          <img src=img/tunes-logo.png width="220px" alt="">
+        </a>
+        <p class="mb-0 mt-2">loading...</p>
+      </span>
+      <span class="ml-4 mr-lg-5 mb-5 text-center" style="max-width: 220px">
+        <a href="">
+          <img src=img/tunes-logo.png width="220px" alt="">
+        </a>
+        <p class="mb-0 mt-2">loading...</p>
+      </span>
+      <span class="ml-4 mr-lg-5 mb-5 text-center" style="max-width: 220px">
+        <a href="">
+          <img src=img/tunes-logo.png width="220px" alt="">
+        </a>
+        <p class="mb-0 mt-2">loading...</p>
+      </span>
+      <span class="ml-4 mr-lg-5 mb-5 text-center" style="max-width: 220px">
+        <a href="">
+          <img src=img/tunes-logo.png width="220px" alt="">
+        </a>
+        <p class="mb-0 mt-2">loading...</p>
+      </span>
+      <span class="ml-4 mr-lg-5 mb-5 text-center" style="max-width: 220px">
+        <a href="">
+          <img src=img/tunes-logo.png width="220px" alt="">
+        </a>
+        <p class="mb-0 mt-2">loading...</p>
+      </span>
+      <span class="ml-4 mr-lg-5 mb-5 text-center" style="max-width: 220px">
+        <a href="">
+          <img src=img/tunes-logo.png width="220px" alt="">
+        </a>
+        <p class="mb-0 mt-2">loading...</p>
+      </span>
+      <span class="ml-4 mr-lg-5 mb-5 text-center" style="max-width: 220px">
+        <a href="">
+          <img src=img/tunes-logo.png width="220px" alt="">
+        </a>
+        <p class="mb-0 mt-2">loading...</p>
+      </span>
+      <span class="ml-4 mr-lg-5 mb-5 text-center" style="max-width: 220px">
+        <a href="">
+          <img src=img/tunes-logo.png width="220px" alt="">
+        </a>
+        <p class="mb-0 mt-2">loading...</p>
+      </span>
     </div>
 
     <hr/>
@@ -106,7 +171,10 @@
     <div class="row">
       <div class="col text-center">
         <h4 style="font-weight: 900; font-style: italic">
-          Refresh to see more random tunes
+          <a href="index.html" class="btn btn-lg btn-outline-light mr-2" style="font-weight: 900; border: white solid 2px;">
+            Refresh
+          </a>
+           to see more random tunes
         </h4>
       </div>
     </div>

@@ -38,9 +38,21 @@
 }
 
 .gradient-button {
-  border-radius: 1rem; font-weight: 700; font-style: italic; background: #7474BF;  /* fallback for old browsers */
+  border-radius: 2rem; font-weight: 700; font-style: italic; background: #7474BF;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to right, #348AC7, #7474BF);  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to right, #348AC7, #7474BF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   color: #fff;
   border: 3px solid #eee !important;
+}
+
+.fade-in {
+  opacity: 0;
+  transition: opacity 2s;
+  -webkit-transition: opacity 2s; /* Safari */
+}
+
+.fade-in-slower {
+  opacity: 0;
+  transition: opacity 3s;
+  -webkit-transition: opacity 3s; /* Safari */
 }

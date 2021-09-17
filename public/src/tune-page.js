@@ -13,39 +13,32 @@ export default class TunePage {
       let tuneId = new URL(window.location.href).searchParams.get('id');
 
       if (!tuneId) {
-        tuneId = await web3.getOwnersTuneId()
+        tuneId = await web3.getOwnersTuneIds()
       }
       if (!tuneId) { window.location = Pages.HOME.uri }
 
       await this._displayTune(tuneId, web3);
     }
     catch (e) {
-      //TODO show blank album art and songs
       ErrorMonitor.logError(e);
+      ErrorMonitor.showErrorMessage(e, 'loading this tune', 'try viewing a different one until we figure out the problem');
+      document.querySelector(`h1[data-amplitude-song-info="name"]`).innerHTML = `⚠️ could not load tune`;
     }
   }
 
   async _displayTune(tuneId, web3) {
-    try {
-      const tune = await web3.getTune(tuneId);
+    const tune = await web3.getTune(tuneId);
 
-      document.getElementById('albumCoverSpinnerContainer').style.display = 'none';
-      document.querySelector('img[data-amplitude-song-info="cover_art_url"]').style.display = 'block';
+    document.querySelector('img[data-amplitude-song-info="cover_art_url"]').classList.add('glow');
 
-      Amplitude.init({
-        "bindings": {
-          37: 'prev',
-          39: 'next',
-          32: 'play_pause'
-        },
-        "songs": [tune]
-      });
-    }
-    catch (e) {
-      ErrorMonitor.logError(e);
-      document.getElementById('albumCoverSpinnerContainer').style.display = 'none';
-      alert(`Sorry, there was a problem. Let @thedon know in Discord with these details:\n\n${e.message} and ${e.stack}`);
-    }
+    Amplitude.init({
+      "bindings": {
+        37: 'prev',
+        39: 'next',
+        32: 'play_pause'
+      },
+      "songs": [tune]
+    });
   }
 
   _listenForClicks() {

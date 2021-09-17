@@ -2,6 +2,7 @@
 
 import erc721 from '../compiled_contract/ERC721.js';
 import metadata from '../compiled_contract/Metadata.js';
+import ErrorMonitor from "./error-monitor.js";
 
 
 export default class Web3Wrapper {
@@ -18,8 +19,9 @@ export default class Web3Wrapper {
     this.metadataContract = new ethers.Contract(this.metadataAddress, metadata, this.provider)
   }
 
-  async getOwnersTuneId() {
-    return null;
+  async getOwnersTuneIds() {
+    //TODO connect to wallet and return tune ids belonging to owner. Only 1 will be display for now
+    return [3057, 1, 2, 3];
   }
 
   async getTuneIDOwner(tuneId) {
@@ -33,10 +35,18 @@ export default class Web3Wrapper {
     let tuneOfficialMetadata = await this.tunesContract.tokenURI(tuneId)
 
     let tuneDataUri = 'https://ipfs.io/ipfs/' + tuneOfficialMetadata.slice(7);
-    // console.log(tuneDataUri)
 
+    let response;
+    try {
+      // ignore the error that fetch throws from leaving the page before it finishes
+      response = await fetch(tuneDataUri);
+    }
+    catch (e) {
+      ErrorMonitor.logError(e);
+      debugger;
+      return;
+    }
 
-    let response = await fetch(tuneDataUri);
     let json = await response.json();
     // console.log(json)
 
