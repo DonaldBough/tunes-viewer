@@ -2,8 +2,6 @@
 
 import erc721 from '../compiled_contract/ERC721.js';
 import metadata from '../compiled_contract/Metadata.js';
-// import ethers from "./ethers.js";
-// import {Web3} from './ethers.js';
 
 
 export default class Web3Wrapper {
@@ -34,12 +32,17 @@ export default class Web3Wrapper {
 
     let tuneOfficialMetadata = await this.tunesContract.tokenURI(tuneId)
 
-    fetch(tuneOfficialMetadata).then(response => response.json()).then(json => {
-      console.log(json)
-    })
+    let tuneDataUri = 'https://ipfs.io/ipfs/' + tuneOfficialMetadata.slice(7);
+    // console.log(tuneDataUri)
 
-    let response = await fetch(tuneOfficialMetadata);
+
+    let response = await fetch(tuneDataUri);
     let json = await response.json();
+    // console.log(json)
+
+    let imageCoverArt = 'https://ipfs.io/ipfs/Qmcu552EPV98N9vi96sGN72XJCeBF4n7jC5XtA1h3HF5kC/' + tuneId + '-composite.png';
+    console.log(imageCoverArt)
+
 
     return {
       "name": json.name,
@@ -48,7 +51,8 @@ export default class Web3Wrapper {
       "artist": "TODO",
       "album": "Tunes",
       "url": "./your-tears-breed-cold-flurries-song",
-      "cover_art_url": json.image,
+      // Placeholder for now till metadata contract is made available
+      "cover_art_url": imageCoverArt,
       "id": tuneId,
     }
   }
