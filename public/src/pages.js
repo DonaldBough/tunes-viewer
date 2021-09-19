@@ -7,6 +7,10 @@ const Pages = {
     uri: './tune.html',
     file: 'tune.html',
   },
+  TUNES: {
+    uri: './tunes.html',
+    file: 'tunes.html',
+  },
 };
 
 export default Pages;

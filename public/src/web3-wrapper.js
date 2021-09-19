@@ -19,9 +19,15 @@ export default class Web3Wrapper {
     this.metadataContract = new ethers.Contract(this.metadataAddress, metadata, this.provider)
   }
 
-  async getOwnersTuneIds() {
-    //TODO connect to wallet and return tune ids belonging to owner. Only 1 will be display for now
-    return [3057, 1, 2, 3];
+  async getOwnersAddress() {
+    //TODO connect to wallet and return their address. Return null or empty string if we can't get it
+    return '0x9019738cdc9b33a3db6b924e14f93b1d58c5c49e';
+  }
+
+  async getOwnersTuneIds(ownerAddress) {
+    //TODO connect to wallet and return tune ids belonging to owner.
+    //TODO return null for error, empty array display 'no tunes found' message
+    return [4588, 3173, 3053, 2195, 1783];
   }
 
   async getTuneIDOwner(tuneId) {
@@ -43,7 +49,6 @@ export default class Web3Wrapper {
     }
     catch (e) {
       ErrorMonitor.logError(e);
-      debugger;
       return;
     }
 
@@ -60,7 +65,7 @@ export default class Web3Wrapper {
       "ownerUrl": "https://opensea.io/" + tuneOwner,
       "artist": "TODO",
       "album": "Tunes",
-      "url": "./your-tears-breed-cold-flurries-song",
+      "url": "ipfs.io/songs-coming-soon.mp3",
       // Placeholder for now till metadata contract is made available
       "cover_art_url": imageCoverArt,
       "id": tuneId,

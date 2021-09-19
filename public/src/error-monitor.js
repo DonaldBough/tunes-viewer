@@ -1,5 +1,7 @@
 'use strict';
 
+import SharedHelper from "./shared-helper.js";
+
 export default class ErrorMonitor {
   static logError(error, isSlackError = false) {
     console.error(`${error} - ${error?.stack}`);
@@ -25,7 +27,7 @@ export default class ErrorMonitor {
   static showErrorMessage(error = {}, actionCausingError, errorSolution) {
     const formattedMessage = this._getFormattedErrorMessage(error, actionCausingError, errorSolution);
 
-    alert(formattedMessage);
+    SharedHelper.displayMessage(formattedMessage);
   }
 
   static _getFormattedErrorMessage(error, actionCausingError, errorSolution = 'try refreshing the page or try again later') {

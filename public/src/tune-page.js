@@ -3,19 +3,23 @@
 import ErrorMonitor from "./error-monitor.js";
 import Web3Wrapper from "./web3-wrapper.js";
 import Pages from "./pages.js";
+import SharedHelper from "./shared-helper.js";
+import Navbar from "./navbar.js";
 
 export default class TunePage {
   async start() {
     try {
+      new Navbar().start();
       this._listenForClicks();
 
       const web3 = new Web3Wrapper();
       let tuneId = new URL(window.location.href).searchParams.get('id');
 
       if (!tuneId) {
-        tuneId = await web3.getOwnersTuneIds()
+        SharedHelper.displayMessage('No tune id found in url. Make sure your URL is correct. We\'ll take you back to the home page for now.');
+        window.location = Pages.HOME.uri;
+        return;
       }
-      if (!tuneId) { window.location = Pages.HOME.uri }
 
       await this._displayTune(tuneId, web3);
     }
@@ -28,8 +32,10 @@ export default class TunePage {
 
   async _displayTune(tuneId, web3) {
     const tune = await web3.getTune(tuneId);
-
+    console.log(tune);
+    //TODO finish displaying tune
     document.querySelector('img[data-amplitude-song-info="cover_art_url"]').classList.add('glow');
+    document.getElementById('tuneNumber').innerHTML = tune.id;
 
     Amplitude.init({
       "bindings": {
@@ -48,7 +54,7 @@ export default class TunePage {
       return !(e.keyCode == SPACE_BAR);
     };
 
-    //Handles a click on the song played progress bar.
+    //handles a click on the song played progress bar.
     document.getElementById('song-played-progress').addEventListener('click', function( e ){
       const offset = this.getBoundingClientRect();
       const x = e.pageX - offset.left;

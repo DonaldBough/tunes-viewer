@@ -9,22 +9,56 @@ export default class SharedHelper {
     return `${window.location.origin}/${Pages.TUNE.file}?id=${tuneId}`;
   }
 
-  static async viewOwnersTunes() {
-    try {
-      const web3 = new Web3Wrapper();
+  static getOwnersTunesPageUrl(ownerAddress) {
+    return `${window.location.origin}/${Pages.TUNES.file}?owner=${ownerAddress}`;
+  }
 
-      const tuneIds = await web3.getOwnersTuneIds();
-      if (tuneIds.length > 0) {
-        //only show the first of an owners tunes for now
-        window.location.href = SharedHelper.getTunePageUrl(tuneIds[0]);
+  static async loadTuneIds(tuneIds) {
+    const web3 = new Web3Wrapper();
+    const getTunePromises = tuneIds.reduce((accum, tuneId) => {
+      accum.push(web3.getTune(tuneId));
+      return accum;
+    }, []);
+
+    const tunes = await Promise.all(getTunePromises);
+    return tunes;
+  }
+
+  static getAlbumElements() { return [...document.getElementById('albumContainer').querySelectorAll('span')] }
+
+  static getEmptyAlbumHtml() {
+    return `
+      <span class="ml-4 ml-lg-0 ml-lg-0 mr-lg-5 mb-5 text-center" style="max-width: 220px">
+        <a href="">
+          <img src=img/tunes-logo.png width="220px" alt="">
+        </a>
+        <p class="mb-0 mt-2">loading...</p>
+      </span>
+    `;
+  }
+
+  static displayAlbums(albumElements, tunes = []) {
+    albumElements.forEach((albumElement, index) => {
+      try {
+        const tune = tunes[index];
+
+        if (tune.cover_art_url && tune.name && tune.id) {
+          albumElement.querySelector('img').src = tune.cover_art_url;
+          albumElement.querySelector('img').style.borderRadius = '1rem';
+          albumElement.querySelector('a').href = SharedHelper.getTunePageUrl(tune.id);
+          albumElement.querySelector('p').innerHTML = tune.name;
+        }
       }
-      else {
-        alert('⚠️🤷 We could not find any tunes for this wallet.')
+      catch (e) {
+        ErrorMonitor.logError(e);
+        if (albumElement && albumElement.querySelector('p') && albumElement.querySelector('p').innerHTML) {
+          albumElement.querySelector('p').innerHTML = '⚠️ could not load tune'
+        }
       }
-    }
-    catch (e) {
-     ErrorMonitor.logError(e);
-     ErrorMonitor.showErrorMessage(e, 'loading your tunes', 'try finding them manually on home page search bar')
-    }
+    });
+  }
+
+  static displayMessage(message) {
+    alert(message);
   }
 }
