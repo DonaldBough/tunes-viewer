@@ -20,8 +20,13 @@ export default class Web3Wrapper {
   }
 
   async getOwnersAddress() {
-    //TODO connect to wallet and return their address. Return null or empty string if we can't get it
-    return '0x9019738cdc9b33a3db6b924e14f93b1d58c5c49e';
+    this.provider = new ethers.providers.Web3Provider(window.ethereum, "any")
+    await this.provider.send("eth_requestAccounts", [])
+    const signer = this.provider.getSigner()
+    console.log(signer)
+    const userAccount = await signer.getAddress()
+    console.log("Account:", userAccount);
+    return userAccount
   }
 
   async getOwnersTuneIds(ownerAddress) {
