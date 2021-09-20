@@ -30,6 +30,10 @@ export default class ErrorMonitor {
     SharedHelper.displayMessage(formattedMessage);
   }
 
+  static logDebug(message) {
+    console.warn(message);
+  }
+
   static _getFormattedErrorMessage(error, actionCausingError, errorSolution = 'try refreshing the page or try again later') {
     let displayMessage;
 

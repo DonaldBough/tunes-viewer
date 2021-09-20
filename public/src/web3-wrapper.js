@@ -19,14 +19,25 @@ export default class Web3Wrapper {
     this.metadataContract = new ethers.Contract(this.metadataAddress, metadata, this.provider)
   }
 
+  isWeb3Browser() {
+    return window.ethereum;
+  }
+
   async getOwnersAddress() {
-    this.provider = new ethers.providers.Web3Provider(window.ethereum, "any")
-    await this.provider.send("eth_requestAccounts", [])
-    const signer = this.provider.getSigner()
-    console.log(signer)
-    const userAccount = await signer.getAddress()
-    console.log("Account:", userAccount);
-    return userAccount
+    try {
+      this.provider = new ethers.providers.Web3Provider(window.ethereum, "any")
+      await this.provider.send("eth_requestAccounts", [])
+      const signer = this.provider.getSigner()
+      console.log(signer)
+      const userAccount = await signer.getAddress()
+      console.log("Account:", userAccount);
+      return userAccount
+    }
+    catch (e) {
+      const USER_DENIED = 4001;
+      if (e.code !== USER_DENIED) { ErrorMonitor.logError(e) }
+      return null
+    }
   }
 
   async getOwnersTuneIds(ownerAddress) {

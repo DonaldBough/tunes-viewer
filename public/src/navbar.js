@@ -57,14 +57,27 @@ export default class Navbar {
   async _goToOwnersPage() {
     try {
       const web3 = new Web3Wrapper();
-      const ownerAddress = await web3.getOwnersAddress();
 
-      if (!ownerAddress || ownerAddress.trim() === '') { throw new Error('owner address was null or empty') }
+      if (SharedHelper.isMobileScreenSize() && !web3.isWeb3Browser()) {
+        this._goToOwnersPageOnMobileWeb2Browser();
+        return;
+      }
+
+      let ownerAddress = await web3.getOwnersAddress();
+
+      if (!ownerAddress || ownerAddress.trim() === '') { ownerAddress = SharedHelper.getOwnerAddressManually() }
+      if (!ownerAddress || ownerAddress.trim() === '') { return }
+
       window.location.href = SharedHelper.getOwnersTunesPageUrl(ownerAddress);
     }
     catch (e) {
-      ErrorMonitor.logError(e);
       ErrorMonitor.showErrorMessage(e, 'loading your address', 'make sure you give access or try again later');
     }
+  }
+
+  _goToOwnersPageOnMobileWeb2Browser() {
+    const ownerAddress = SharedHelper.getOwnerAddressManually();
+    if (!ownerAddress || ownerAddress.trim() === '') { return }
+    window.location.href = SharedHelper.getOwnersTunesPageUrl(ownerAddress);
   }
 }

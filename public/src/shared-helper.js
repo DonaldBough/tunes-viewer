@@ -3,6 +3,7 @@
 import Pages from "./pages.js";
 import Web3Wrapper from "./web3-wrapper.js";
 import ErrorMonitor from "./error-monitor.js";
+import CacheWrapper from "./cache-wrapper.js";
 
 export default class SharedHelper {
   static getTunePageUrl(tuneId) {
@@ -60,5 +61,33 @@ export default class SharedHelper {
 
   static displayMessage(message) {
     alert(message);
+  }
+
+  static getOwnerAddressManually() {
+    let ownerAddress;
+    const cachedOwnerAddress = CacheWrapper.getString(CacheWrapper.OWNER_ADDRESS_CACHE_KEY);
+
+    if (cachedOwnerAddress && cachedOwnerAddress !== '') {
+      if (confirm(`We couldn't connect to your wallet, but have the address you pasted last time. Would you like to use that?`)) {
+        ownerAddress = cachedOwnerAddress;
+      }
+    }
+
+    if (!ownerAddress || ownerAddress.trim() === '') {
+      ownerAddress = prompt(`We couldn't get your address from your wallet. If you didn't cancel, manually paste in your address here`);
+      if (ownerAddress && ownerAddress !== '') {
+        CacheWrapper.setString(CacheWrapper.OWNER_ADDRESS_CACHE_KEY, ownerAddress);
+      }
+    }
+    return ownerAddress;
+  }
+
+  static isMobileScreenSize() {
+    // https://stackoverflow.com/a/8876069
+    const width = Math.max(
+        document.documentElement.clientWidth,
+        window.innerWidth || 0
+    );
+    return width <= 768;
   }
 }

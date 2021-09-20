@@ -14,6 +14,7 @@ export default class IndexPage {
   async start() {
     try {
       new NavBar().start();
+      this._moveNavbarElementsOnMobile();
 
       let randomTuneIds = [];
       const numberOfTunes = 5000;
@@ -30,6 +31,15 @@ export default class IndexPage {
     catch (e) {
       ErrorMonitor.logError(e);
       ErrorMonitor.showErrorMessage(e, 'loading the albums')
+    }
+  }
+
+  _moveNavbarElementsOnMobile() {
+    if (SharedHelper.isMobileScreenSize()) {
+      //Move view my tunes and search by tune id, and unhide on mobile
+      [...document.getElementsByClassName('move-on-mobile')].forEach(element => {
+        document.getElementById('movedNavbarElementsContainer').insertAdjacentElement('beforeend', element);
+      });
     }
   }
 }
