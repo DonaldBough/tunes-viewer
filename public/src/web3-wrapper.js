@@ -10,6 +10,10 @@ export default class Web3Wrapper {
   tunesAddress = '0xfa932d5cBbDC8f6Ed6D96Cc6513153aFa9b7487C'
   metadataAddress = '0xD9692a84cC279a159305a4ef1A01eFab77B4Deb2'
 
+  didLoadMoralis = false;
+  moralisAppId = 'BgeS6qPwLUyr8ZyIyw6PR57SMmulsfgBUDG0dsc7';
+  moralisServerUrl = 'https://5rujlfcn8amp.grandmoralis.com:2053/server';
+
   provider
   tunesContract
   metadataContract
@@ -41,9 +45,26 @@ export default class Web3Wrapper {
   }
 
   async getOwnersTuneIds(ownerAddress) {
-    //TODO connect to wallet and return tune ids belonging to owner.
-    //TODO return null for error, empty array display 'no tunes found' message
-    return [4588, 3173, 3053, 2195, 1783];
+    try {
+      if (!this.didLoadMoralis) {
+        Moralis.initialize(this.moralisAppId);
+        Moralis.serverURL = this.moralisServerUrl;
+      }
+      const options = { chain: 'eth', address: ownerAddress, token_address: this.tunesAddress };
+      const moralisResponse = await Moralis.Web3API.account.getNFTsForContract(options);
+      const tunesNFTs = moralisResponse.result;
+
+      if (!tunesNFTs || !Array.isArray(tunesNFTs)) { return [] }
+
+      return tunesNFTs.reduce((accum, tune) => {
+        if (tune && tune.token_id) { accum.push(tune.token_id) }
+        return accum;
+      }, []);
+    }
+    catch (e) {
+      ErrorMonitor.logError(e);
+      return null;
+    }
   }
 
   async getTuneIDOwner(tuneId) {
@@ -69,11 +90,8 @@ export default class Web3Wrapper {
     }
 
     let json = await response.json();
-    // console.log(json)
 
     let imageCoverArt = 'https://ipfs.io/ipfs/Qmcu552EPV98N9vi96sGN72XJCeBF4n7jC5XtA1h3HF5kC/' + tuneId + '-composite.png';
-    console.log(imageCoverArt)
-
 
     return {
       "name": json.name,

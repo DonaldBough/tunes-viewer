@@ -87,7 +87,7 @@
           <div class="row mt-0 ml-3" style="overflow-wrap: anywhere;">
             <!-- TODO clean h1 h4 font into class            -->
             <h1 style="font-weight: 900; font-size: 5rem; font-style: italic;">A Tunes Gallery By:</h1>
-            <h2 id="ownerText" class="w-100" style="font-style: italic">
+            <h2 id="ownerText" class="w-100" style="font-style: italic; overflow-wrap: anywhere;">
               <span style="visibility: hidden;">Loading...</span>
             </h2>
           </div>
@@ -166,10 +166,13 @@
 <script defer src="/__/firebase/init.js"></script>
 
 <!-- web3 -->
-<script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
 
 <!-- ethereum js  -->
 <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
+
+<!-- moralis sdk -->
+<script src="https://unpkg.com/moralis@0.0.54/dist/moralis.js"></script>
 
 <script type="module">
   import TunesPage from "./src/tunes-page.js";

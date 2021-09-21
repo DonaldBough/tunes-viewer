@@ -57,7 +57,6 @@ export default class Navbar {
   async _goToOwnersPage() {
     try {
       const web3 = new Web3Wrapper();
-
       if (SharedHelper.isMobileScreenSize() && !web3.isWeb3Browser()) {
         this._goToOwnersPageOnMobileWeb2Browser();
         return;
