@@ -90,4 +90,36 @@ export default class SharedHelper {
     );
     return width <= 768;
   }
+
+  static copyTextToClipboard(text, handleErrors = true) {
+    try {
+      const textArea = document.createElement("input");
+
+      // Avoid scrolling to bottom
+      textArea.style.top = "0";
+      textArea.style.left = "0";
+      textArea.style.position = "fixed";
+
+      document.body.appendChild(textArea);
+      textArea.value = text;
+      textArea.focus();
+      textArea.select();
+      textArea.setSelectionRange(0, 99999); /* For mobile devices */
+      //Copy the text inside the text field
+      document.execCommand("copy");
+
+      textArea.remove();
+
+      alert(`✅ URL copied to your clipboard`);
+    }
+    catch (e) {
+      ErrorMonitor.logError(e);
+      if (handleErrors) {
+        prompt(`⚠️🤷 Couldn't copy to your clipboard. Just copy from here instead:`, text);
+      }
+      else {
+        throw e;
+      }
+    }
+  }
 }

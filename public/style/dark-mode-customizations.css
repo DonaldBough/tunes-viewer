@@ -2,6 +2,10 @@
   color: rgb(225,221,214);
   opacity: 0.75 !important;
 }
+
+.btn-outline-light:hover {
+  background-color: white;
+}
 /*.form-control-lg:focus {*/
 /*  color: rgb(196, 189, 180);*/
 /*  background-color: rgb(31, 34, 35);*/

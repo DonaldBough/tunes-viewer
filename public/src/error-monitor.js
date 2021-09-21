@@ -26,8 +26,11 @@ export default class ErrorMonitor {
 
   static showErrorMessage(error = {}, actionCausingError, errorSolution) {
     const formattedMessage = this._getFormattedErrorMessage(error, actionCausingError, errorSolution);
+    ErrorMonitor.displayErrorMessage(formattedMessage, error);
+  }
 
-    SharedHelper.displayMessage(formattedMessage);
+  static displayErrorMessage(message, error) {
+    prompt(message, `${error}\n\n${error?.stack}`);
   }
 
   static logDebug(message) {
@@ -38,14 +41,14 @@ export default class ErrorMonitor {
     let displayMessage;
 
     if (actionCausingError) {
-      displayMessage = `❌😩 Sorry, we had a problem ${actionCausingError}. For now ${errorSolution}.`;
+      displayMessage = `❌🙃 Sorry, we had a problem ${actionCausingError}. For now ${errorSolution}.`;
     }
     else {
-      displayMessage = `❌😩 Sorry, we ran into an error, ${errorSolution}`
+      displayMessage = `❌🙃 Sorry, we ran into an error, ${errorSolution}`
     }
 
     displayMessage +=
-        `\n\nIf this keeps happening, send this technical jargon to @thedon in Discord or donaldbough@gmail.com so we can fix it:\n\n${error}\n\n${error?.stack}`
+        `\n\nIf this keeps happening, copy and send this technical jargon to @thedon in Discord or donaldbough@gmail.com so we can fix it:`;
 
     return displayMessage;
   }

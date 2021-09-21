@@ -15,6 +15,19 @@ export default class TunesPage {
   async start() {
     try {
       new Navbar().start();
+      this._listenForClicks();
+
+      try {
+        const originalText = document.getElementById('tunesGalleryText').innerText;
+        if (SharedHelper.isMobileScreenSize()) {
+          //remove A from "A Tunes Gallery" on mobile
+          document.getElementById('tunesGalleryText').innerHTML = originalText.substr(2);
+        }
+      }
+      catch (e) {
+        ErrorMonitor.logError(e);
+      }
+
       const ownerAddress = new URL(window.location.href).searchParams.get('owner');
 
       if (!ownerAddress || ownerAddress === '') {
@@ -62,5 +75,16 @@ export default class TunesPage {
     catch (e) {
       ErrorMonitor.logError(e);
     }
+  }
+
+  _listenForClicks() {
+    document.getElementById('shareYourGalleryButton').addEventListener('click', () => {
+      try {
+        SharedHelper.copyTextToClipboard(window.location.href, false);
+      }
+      catch (e) {
+        alert(`⚠️ Couldn't copy to your clipboard. Instead, just copy the url and share it.`);
+      }
+    });
   }
 }
