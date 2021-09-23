@@ -32,8 +32,6 @@ export default class TunePage {
 
   async _displayTune(tuneId, web3) {
     const tune = await web3.getTune(tuneId);
-    console.log(tune);
-    //TODO finish displaying tune
     document.querySelector('img[data-amplitude-song-info="cover_art_url"]').classList.add('glow');
     document.getElementById('tuneNumber').innerHTML = tune.id;
 

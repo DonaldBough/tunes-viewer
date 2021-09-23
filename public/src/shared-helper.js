@@ -43,11 +43,21 @@ export default class SharedHelper {
       try {
         const tune = tunes[index];
 
-        if (tune.cover_art_url && tune.name && tune.id) {
+        albumElement.querySelector('p').innerHTML = tune.name || 'problem loading name';
+
+        if (tune.cover_art_url) {
           albumElement.querySelector('img').src = tune.cover_art_url;
           albumElement.querySelector('img').style.borderRadius = '1rem';
+        }
+        else {
+          ErrorMonitor.logError(new Error(`No tune cover_art_url for tune: ${JSON.stringify(tune)}`));
+        }
+
+        if (tune.id) {
           albumElement.querySelector('a').href = SharedHelper.getTunePageUrl(tune.id);
-          albumElement.querySelector('p').innerHTML = tune.name;
+        }
+        else {
+          ErrorMonitor.logError(new Error(`No tune id for tune: ${JSON.stringify(tune)}`));
         }
       }
       catch (e) {
@@ -104,7 +114,7 @@ export default class SharedHelper {
       textArea.value = text;
       textArea.focus();
       textArea.select();
-      textArea.setSelectionRange(0, 99999); /* For mobile devices */
+      // textArea.setSelectionRange(0, 99999); /* For mobile devices */
       //Copy the text inside the text field
       document.execCommand("copy");
 

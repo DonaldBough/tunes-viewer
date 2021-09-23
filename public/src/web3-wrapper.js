@@ -10,6 +10,8 @@ export default class Web3Wrapper {
   tunesAddress = '0xfa932d5cBbDC8f6Ed6D96Cc6513153aFa9b7487C'
   metadataAddress = '0xD9692a84cC279a159305a4ef1A01eFab77B4Deb2'
 
+  tuneSongsAddress = '0x60d08DBDEd0bf56d21977b597793e69D1C5456e0';
+
   didLoadMoralis = false;
   moralisAppId = 'BgeS6qPwLUyr8ZyIyw6PR57SMmulsfgBUDG0dsc7';
   moralisServerUrl = 'https://5rujlfcn8amp.grandmoralis.com:2053/server';
@@ -17,10 +19,12 @@ export default class Web3Wrapper {
   provider
   tunesContract
   metadataContract
+  tunesSongsContract
   constructor() {
     this.provider = new ethers.providers.InfuraProvider('homestead', 'eefe88ec80f74d33a52967249a8d4db1')
     this.tunesContract = new ethers.Contract(this.tunesAddress, erc721, this.provider)
     this.metadataContract = new ethers.Contract(this.metadataAddress, metadata, this.provider)
+    this.tunesSongsContract = new ethers.Contract(this.tuneSongsAddress, erc721, this.provider);
   }
 
   isWeb3Browser() {
@@ -67,44 +71,78 @@ export default class Web3Wrapper {
     }
   }
 
-  async getTuneIDOwner(tuneId) {
-    let tuneOwner = await this.tunesContract.ownerOf(tuneId);
-    return tuneOwner;
-  }
-
   async getTune(tuneId) {
-    let tuneOwner = await this.getTuneIDOwner(tuneId);
-
-    let tuneOfficialMetadata = await this.tunesContract.tokenURI(tuneId)
-
-    let tuneDataUri = 'https://ipfs.io/ipfs/' + tuneOfficialMetadata.slice(7);
-
-    let response;
-    try {
-      // ignore the error that fetch throws from leaving the page before it finishes
-      response = await fetch(tuneDataUri);
-    }
-    catch (e) {
-      ErrorMonitor.logError(e);
-      return;
-    }
-
-    let json = await response.json();
-
-    let imageCoverArt = 'https://ipfs.io/ipfs/Qmcu552EPV98N9vi96sGN72XJCeBF4n7jC5XtA1h3HF5kC/' + tuneId + '-composite.png';
+    const tuneOwner = await this._getTuneIDOwner(tuneId);
+    const tuneOfficialMetaData = await this._getTuneOfficialMetaData(tuneId);
+    const tunesSong = await this._getTunesSong(tuneId);
+    const artunistCoverArtUrl = 'https://ipfs.io/ipfs/Qmcu552EPV98N9vi96sGN72XJCeBF4n7jC5XtA1h3HF5kC/' + tuneId + '-composite.png';
 
     return {
-      "name": json.name,
+      "name": tuneOfficialMetaData.name,
       "owner": tuneOwner,
       "ownerUrl": "https://opensea.io/" + tuneOwner,
       "artist": "TODO",
-      "album": "Tunes",
-      "url": "ipfs.io/songs-coming-soon.mp3",
+      "album": tunesSong.name,
+      "url": tunesSong.animation_url,
       // Placeholder for now till metadata contract is made available
-      "cover_art_url": imageCoverArt,
+      "cover_art_url": artunistCoverArtUrl,
       "id": tuneId,
     }
   }
 
+  async _getTuneIDOwner(tuneId) {
+    try {
+      return await this.tunesContract.ownerOf(tuneId);
+    }
+    catch (e) {
+      ErrorMonitor.logError(e);
+      return '⚠️ problem loading owner'
+    }
+  }
 
+  async _getTuneOfficialMetaData(tuneId) {
+    const errorDefaults = {
+      name: 'problem loading name',
+    }
+
+    try {
+      let tuneOfficialMetadataUrl = await this.tunesContract.tokenURI(tuneId)
+      // ignore the error that fetch throws from leaving the page before it finishes
+      let response = await fetch('https://ipfs.io/ipfs/' + tuneOfficialMetadataUrl.slice(7));
+      return await response.json() || errorDefaults;
+    }
+    catch (e) {
+      ErrorMonitor.logError(e);
+      return errorDefaults;
+    }
+  }
+
+  async _getTunesSong(tuneId) {
+    const errorDefaults = {
+      animation_url: 'problem-loading-song.mp3',
+      name: '⚠️ problem loading song name',
+    }
+    const tunesSongNotAvailForThisTuneDefaults = {
+      animation_url: '',
+      name: '',
+    }
+
+    let tunesSongBase64;
+    try {
+      tunesSongBase64 = await this.tunesSongsContract.tokenURI(tuneId);
+    }
+    catch (e) {
+      return tunesSongNotAvailForThisTuneDefaults;
+    }
+    //tunes song exists/was available
+    try {
+      const tunesSong = JSON.parse(atob(tunesSongBase64.substring(29)));
+      tunesSong.animation_url = 'https://ipfs.io/ipfs/' + tunesSong.animation_url.slice(7);
+      return tunesSong
+    }
+    catch (e) {
+      ErrorMonitor.logError(e);
+      return errorDefaults;
+    }
+  }
 }
