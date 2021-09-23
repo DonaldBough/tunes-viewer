@@ -1,6 +1,7 @@
 'use strict';
 
 import erc721 from '../compiled_contract/ERC721.js';
+import derivative from '../compiled_contract/Derivative.js';
 import metadata from '../compiled_contract/Metadata.js';
 import ErrorMonitor from "./error-monitor.js";
 
@@ -11,12 +12,14 @@ export default class Web3Wrapper {
   metadataAddress = '0xD9692a84cC279a159305a4ef1A01eFab77B4Deb2'
 
   tuneSongsAddress = '0x60d08DBDEd0bf56d21977b597793e69D1C5456e0';
+  tunesAiArtAddress = '0x64f57f8a514415526caa75b52ca12ba83416437c'
 
   didLoadMoralis = false;
   moralisAppId = 'BgeS6qPwLUyr8ZyIyw6PR57SMmulsfgBUDG0dsc7';
   moralisServerUrl = 'https://5rujlfcn8amp.grandmoralis.com:2053/server';
 
   provider
+  signer
   tunesContract
   metadataContract
   tunesSongsContract
@@ -35,9 +38,9 @@ export default class Web3Wrapper {
     try {
       this.provider = new ethers.providers.Web3Provider(window.ethereum, "any")
       await this.provider.send("eth_requestAccounts", [])
-      const signer = this.provider.getSigner()
-      console.log(signer)
-      const userAccount = await signer.getAddress()
+      this.signer = this.provider.getSigner()
+      console.log(this.signer)
+      const userAccount = await this.signer.getAddress()
       console.log("Account:", userAccount);
       return userAccount
     }
@@ -144,5 +147,11 @@ export default class Web3Wrapper {
       ErrorMonitor.logError(e);
       return errorDefaults;
     }
+  }
+
+  async claimTuneDerivates(tuneIds, derivativeAddress) {
+    this.derivativeContract = new ethers.Contract(derivativeAddress, derivative, this.provider);
+    await this.derivativeContract.connect(this.signer).claim(tuneIds);
+
   }
 }
