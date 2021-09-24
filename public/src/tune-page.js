@@ -47,10 +47,12 @@ export default class TunePage {
 
   _listenForClicks() {
     //ignore space bar so we can pause/play 
-    window.onkeydown = function(e) {
-      const SPACE_BAR = 32;
-      return !(e.keyCode == SPACE_BAR);
-    };
+    // window.onkeydown = function(e) {
+    //   const SPACE_BAR = 32;
+    //   return !(e.keyCode == SPACE_BAR);
+    // };
+
+
 
     //handles a click on the song played progress bar.
     document.getElementById('song-played-progress').addEventListener('click', function( e ){

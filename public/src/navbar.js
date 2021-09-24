@@ -29,7 +29,7 @@ export default class Navbar {
 
     [
       document.getElementById('searchTuneIdButton'),
-      document.getElementById('searchTuneIdForm'),
+      // document.getElementById('searchTuneIdForm'),
     ].forEach(element => {
       element.addEventListener("submit", (event) => {
         return this._onTuneIdSearch(event);
