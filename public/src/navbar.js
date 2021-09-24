@@ -44,7 +44,7 @@ export default class Navbar {
       const searchedTitle = document.getElementById('searchTuneIdInput').value;
       const index = HardCodedSongTitles.getAllSongTitles().indexOf(searchedTitle);
       if (index === -1) {
-        SharedHelper.displayMessage(`❌🙅 ${document.getElementById('searchTuneIdInput').value} isn't a tunes song title. Make sure to click the suggestion, and try again.`)
+        SharedHelper.displayMessage(`❌🙅 "${document.getElementById('searchTuneIdInput').value}" isn't a tunes song title. Make sure to click the suggestion, and try again.`)
         return false;
       }
       window.location.href = SharedHelper.getTunePageUrl(index + 1);
