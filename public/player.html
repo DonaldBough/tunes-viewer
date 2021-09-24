@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tunes Viewer</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+  <!-- Font awesome icons -->
+  <script src="https://kit.fontawesome.com/56c3afa462.js" crossorigin="anonymous"></script>
+
+  <!-- Amplitude JS Music playing library  -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/amplitudejs@5.3.2/dist/amplitude.js"></script>
+
+  <!-- Amplitude JS Music Player CSS  -->
+  <link rel="stylesheet" href="style/amplitude-js.css" type="text/css"/>
+
+  <link rel="stylesheet" href="style/main.css" type="text/css"/>
+
+  <link rel="stylesheet" href="style/dark-mode-generated.css" type="text/css"/>
+  <link rel="stylesheet" href="style/dark-mode-customizations.css" type="text/css"/>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XB07SXT708"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-XB07SXT708');
+  </script>
+</head>
+
+<body class="fade-in" onload="document.body.style.opacity='1'">
+<div class="container mt-0" style="margin-bottom: 5rem;">
+
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="row mt-3">
+      <div class="col-4 col-lg-1 px-0">
+        <a href="index.html">
+          <img class="float-right" src="./img/tunes-logo.png" alt="" width="85px"
+               style="border-radius:100%; border:3px solid #fff; margin-top:1rem;">
+        </a>
+      </div>
+
+      <div class="col-6 col-lg-3 mt-3 mt-lg-3">
+        <a href="index.html">
+            <span class="h1 font-weight-bold" style="color: rgb(255, 255, 255);">
+              TUNES
+            </span>
+          <span class="h3 font-weight-light mb-5" style="color: rgb(255, 255, 255); letter-spacing: 8px;">
+              PROJECT
+            </span>
+        </a>
+      </div>
+
+      <div class="col-12 col-lg-3 mt-5 mt-lg-4 px-0 move-on-mobile">
+        <div class="text-center text-lg-left">
+          <a id="viewOwnersTunesButton" class="btn btn-lg btn-primary gradient-button">
+            View Your Tunes
+          </a>
+        </div>
+      </div>
+
+      <div class="col-12 col-lg-1 mt-2 mt-lg-4 px-0 move-on-mobile">
+        <h4 class="text-center text-lg-left px-0" style="font-style: italic; font-weight: 700; margin-top: .8rem;">
+          OR
+        </h4>
+      </div>
+
+      <div class="col-10 offset-1 col-lg-4 offset-lg-0 mt-2 mt-lg-4 px-0 move-on-mobile">
+        <form id="searchTuneIdForm" class="input-group w-auto my-0 py-1">
+          <input id="searchTuneIdInput" class="form-control form-control-lg pr-0" type="search" placeholder="Search by tune id"
+                 aria-label="Search" style="border-radius: 2rem 0 0 2rem;">
+          <div class="input-group-append">
+            <button id="searchTuneIdButton" type="submit" class="btn btn-primary gradient-button pl-3 pr-4" style="font-size: 20px; border-radius: 0 2rem 2rem 0;">
+              Go
+            </button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </nav>
+
+  <div class="row" style="margin-top: 4rem;">
+    <div class="offset-2 offset-lg-4 col-8 col-lg-4">
+      <img class="img-fluid" data-amplitude-song-info="cover_art_url" src="./img/tunes-logo.png" alt=""/>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col text-center">
+      <h1 class="song-name" data-amplitude-song-info="name" style="font-weight: 700">Loading...</h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <div class="player" style="border-radius: 1rem;">
+        <div class="meta-container">
+          <div class="song-meta-container">
+            <h5 data-amplitude-song-info="album" class="album text-center">Loading...</h5>
+          </div>
+          <div class="time-container">
+            <div class="current-time">
+              <span class="amplitude-current-minutes" data-amplitude-song-index="0"></span>:<span class="amplitude-current-seconds" data-amplitude-song-index="0"></span>
+            </div>
+
+            <div class="duration">
+              <span class="amplitude-duration-minutes" data-amplitude-song-index="0">3</span>:<span class="amplitude-duration-seconds" data-amplitude-song-index="0">30</span>
+            </div>
+          </div>
+          <progress class="amplitude-song-played-progress" data-amplitude-song-index="0" id="song-played-progress"></progress>
+          <div class="control-container">
+            <div class="amplitude-prev">
+
+            </div>
+            <div class="amplitude-play-pause" data-amplitude-song-index="0">
+
+            </div>
+            <div class="amplitude-next">
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <ul id="songList" class="list-group">
+        <li class="list-group-item">This is <a href="http://SortableJS.github.io/Sortable/">Sortable</a></li>
+        <li class="list-group-item">It works with Bootstrap...</li>
+        <li class="list-group-item">...out of the box.</li>
+        <li class="list-group-item">It has support for touch devices.</li>
+        <li class="list-group-item">Just drag some elements around.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <div class="card glow-shadow">
+        <div class="card-body mx-5">
+          <h2 class="mb-2">
+            <span class="text-secondary">Owned by</span> <span data-amplitude-song-info="owner"></span>
+          </h2>
+
+          <div class="mt-4">
+              <span class="h5 text-secondary">
+                Tune #
+              </span>
+            <span class="h5 font-italic" id="tuneNumber"></span>
+          </div>
+
+          <div class="mt-4">
+              <span class="h5 text-secondary">
+                Audio link
+                <i class="fas fa-link"></i>
+              </span>
+            <span>
+                  <span class="h5 font-italic" data-amplitude-song-info="url"></span>
+                </span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+<!-- Sentry error monitoring  -->
+<!--<script-->
+<!--    src="https://browser.sentry-cdn.com/6.12.0/bundle.min.js"-->
+<!--    integrity="sha384-S3qfdh3AsT1UN84WIYNuOX9vVOoFg3nB17Jp5/pTFGDBGBt+dtz7MGAV845efkZr"-->
+<!--    crossorigin="anonymous"-->
+<!--&gt;</script>-->
+
+<!--<script src="src/init-sentry.js"></script>-->
+
+<!-- update the version number as needed -->
+<script defer src="/__/firebase/8.8.1/firebase-app.js"></script>
+
+<!-- initialize the SDK after all desired features are loaded -->
+<script defer src="/__/firebase/init.js"></script>
+
+<!-- web3 -->
+<script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
+
+<!-- ethereum js  -->
+<script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
+
+<script type="module">
+  import PlayerPage from "./src/player-page.js";
+
+  new PlayerPage().start();
+</script>
+
+<!-- Bootstrap js libs -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+<!-- Sortable js for table -->
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@1.14.0/Sortable.min.js"></script>
+
+
+</body>
+</html>
