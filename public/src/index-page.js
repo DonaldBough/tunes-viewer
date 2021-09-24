@@ -36,7 +36,7 @@ export default class IndexPage {
 
   _moveNavbarElementsOnMobile() {
     if (SharedHelper.isMobileScreenSize()) {
-      //Move view my tunes and search by tune id, and unhide on mobile
+      //Move view my tunes and Search by tune name, and unhide on mobile
       [...document.getElementsByClassName('move-on-mobile')].forEach(element => {
         document.getElementById('movedNavbarElementsContainer').insertAdjacentElement('beforeend', element);
       });

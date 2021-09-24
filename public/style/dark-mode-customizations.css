@@ -6,6 +6,24 @@
 .btn-outline-light:hover {
   background-color: white;
 }
+
+.autocomplete-items {
+  border-right-color: rgb(69, 74, 77);
+  border-left-color: rgb(69, 74, 77);
+  border-bottom-color: initial;
+  border-top-color: initial;
+}
+.autocomplete-items div {
+  background-color: rgb(37, 39, 40);
+  border-bottom-color: rgb(69, 74, 77);
+}
+.autocomplete-items div:hover {
+  background-color: rgb(44, 47, 49);
+}
+.autocomplete-active {
+  color: rgb(249, 247, 244);
+  background-color: rgb(6, 105, 201) !important;
+}
 /*.form-control-lg:focus {*/
 /*  color: rgb(196, 189, 180);*/
 /*  background-color: rgb(31, 34, 35);*/

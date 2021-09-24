@@ -3,11 +3,19 @@
 import SharedHelper from "./shared-helper.js";
 import ErrorMonitor from "./error-monitor.js";
 import Web3Wrapper from "./web3-wrapper.js";
+import HardCodedSongTitles from "./hard-coded-song-titles.js";
+import Autocomplete from "./autocomplete.js";
 
 export default class Navbar {
   async start() {
     try {
       this._listenForClicks();
+
+      Autocomplete.autocomplete(
+          document.getElementById('searchTuneIdInput'),
+          HardCodedSongTitles.getAllSongTitles(),
+          this._onTuneIdSearch
+      );
     }
     catch (e) {
       ErrorMonitor.logError(e);
@@ -30,27 +38,38 @@ export default class Navbar {
   }
 
   _onTuneIdSearch(event) {
-    event.preventDefault();
+    if (event && event.preventDefault) { event.preventDefault() }
 
     try {
-      const parsedTuneId = parseInt(
-          document.getElementById('searchTuneIdInput').value.replace(/\D/g, '')
-      );
-
-      if (isNaN(parsedTuneId)) {
-        SharedHelper.displayMessage(`❌🙅  ${document.getElementById('searchTuneIdInput').value} is not a number. Enter the token id for your tune, and try again.`)
+      const searchedTitle = document.getElementById('searchTuneIdInput').value;
+      const index = HardCodedSongTitles.getAllSongTitles().indexOf(searchedTitle);
+      if (index === -1) {
+        SharedHelper.displayMessage(`❌🙅 ${document.getElementById('searchTuneIdInput').value} isn't a tunes song title. Make sure to click the suggestion, and try again.`)
         return false;
       }
-      if (parsedTuneId < 1 || parsedTuneId > 5000) {
-        SharedHelper.displayMessage(`❌🙅 ${document.getElementById('searchTuneIdInput').value} is not a tune id. Tune ids are the token ids between 1 and 5000.`)
-        return false;
-      }
+      window.location.href = SharedHelper.getTunePageUrl(index + 1);
+      return false;
 
-      window.location.href = SharedHelper.getTunePageUrl(parsedTuneId);
+      // const parsedTuneId = parseInt(
+      //     document.getElementById('searchTuneIdInput').value.replace(/\D/g, '')
+      // );
+      //
+      // if (isNaN(parsedTuneId)) {
+      //   SharedHelper.displayMessage(`❌🙅  ${document.getElementById('searchTuneIdInput').value} is not a number. Enter the token id for your tune, and try again.`)
+      //   return false;
+      // }
+      // if (parsedTuneId < 1 || parsedTuneId > 5000) {
+      //   SharedHelper.displayMessage(`❌🙅 ${document.getElementById('searchTuneIdInput').value} is not a tune id. Tune ids are the token ids between 1 and 5000.`)
+      //   return false;
+      // }
+      //
+      // window.location.href = SharedHelper.getTunePageUrl(parsedTuneId);
+      // return false;
     }
     catch (e) {
       ErrorMonitor.logError(e);
-      ErrorMonitor.showErrorMessage(e, 'going to that tune', `be sure to use a valid tune id or try a different one`)
+      ErrorMonitor.showErrorMessage(e, 'going to that tune', `be sure to use a valid tune song or try a different one`)
+      return false;
     }
   }
 
