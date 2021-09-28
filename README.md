@@ -2,7 +2,7 @@
 A radio for $TUNE songs from the ethereum blockchain. 
 
 ## Vision
-A pirate radio exclusive to $TUNE nft owners. Listen to other songs created by artists for their own $TUNE.
+A interactive pirate radio for Tune songs & portal to the creativity of the Tunes ecosystem.
 
 ## Making Changes
 Project is using plain vanilla JS, bootstrap, Sentry.io (error monitoring), font awesome, and firebase. 
@@ -32,6 +32,19 @@ To deploy changes to the live website, make sure you're in the public folder lik
 - All sorts of artworks, songs, lyrics for a token visible on a single page
 - If a derivative allows an owner to set their own metadata, we can have metamask connection which allows user to do so
 - Allow the derivative owner to claim the derivative using metamask transaction
+
+@m_r0che
+- Two core habit loops: Discover music & Create music
+- Initial solution hypos for Discover music: Browse deriv. ecosystem, Music Player, Recommended Originals and Remixes.
+- Initial solution hypos for Create music: Find a Tune to remix, Match with Tune holders to make originals, Listening activity (likes, follows etc..), Creator profile.
+- Discover music: Trigger = "I want to discover new high quality music" -> Action = Like / Favourite a song / Favourite a Tune -> Reward = Entertained & discovered new music
+- Create music: Trigger = "I want to make and own a song based on a Tune" -> Action = Make Original or Remix -> Reward = Financial / Social Capital
+- Manufactured habit loop for 'Discover music': New track added / Daily creations, medium = email/discord/twitter, when? start of day?
+- Manufactured haibt loop for 'Create music' Suggested collabs / Challenges, medium = email/discord/twitter, when? start of day?
+- Viewer nurtures listeners or creators to buy a Tune or invest somehow in a Tune. I think 10x experience for listener happens when you have some ownership stake... Gas fees are a blocker here.
+- Can we improve Tune & deriv liquidity by providing some additional utility / social value to being a holder? Exclusive access to creator jam sessions?
+- Acquisition of new listeners will happen via sharing of content. How do we make sharing content easy?
+- Acquisition of creators can be kickstarted by existing network of community then word of mouth / content sharing. This happens when creators believe in project or they sell an Original or Remix. Crypto/NFT knowledge will be a barrier for adoption here. Get new creator to remix a Tune asap (perhaps with collab with existing creator for knowledge transfer). Perhaps best Remix in cohort, voted by holders, get promoted to Original... "New creator remix battle"
 
 
 ## @donaldbough thoughts for MVP
