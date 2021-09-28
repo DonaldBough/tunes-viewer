@@ -79,6 +79,7 @@ export default class Web3Wrapper {
     const tuneOfficialMetaData = await this._getTuneOfficialMetaData(tuneId);
     const tunesSong = await this._getTunesSong(tuneId);
     const artunistCoverArtUrl = 'https://ipfs.io/ipfs/Qmcu552EPV98N9vi96sGN72XJCeBF4n7jC5XtA1h3HF5kC/' + tuneId + '-composite.png';
+    //TODO add boilerplate for ordered array of images & audio to return, show which derivs we need to fetch
 
     return {
       "name": tuneOfficialMetaData.name,
@@ -90,6 +91,34 @@ export default class Web3Wrapper {
       // Placeholder for now till metadata contract is made available
       "cover_art_url": artunistCoverArtUrl,
       "id": tuneId,
+    }
+  }
+
+  async getTuneWithDerivatives(tuneId) {
+    const tuneOwner = await this._getTuneIDOwner(tuneId);
+    const tuneOfficialMetaData = await this._getTuneOfficialMetaData(tuneId);
+    const tunesSong = await this._getTunesSong(tuneId);
+    const artunistCoverArtUrl = 'https://ipfs.io/ipfs/Qmcu552EPV98N9vi96sGN72XJCeBF4n7jC5XtA1h3HF5kC/' + tuneId + '-composite.png';
+    const wavesAlbumCoverUrl = ''; //TODO
+    const tunesLyricsImageUrl = ''; //TODO
+    const tunesSequencesImageSvg = ''; //TODO
+
+    return {
+      "name": tuneOfficialMetaData.name,
+      "id": tuneId,
+      "owner": tuneOwner,
+      "ownerUrl": "https://opensea.io/" + tuneOwner,
+      "artist": "TODO",
+      "album": tunesSong.name,
+      "audio": [
+        { name: 'Songs for Tunes', audio: tunesSong.animation_url },
+      ],
+      "images": [
+        { name: 'Artunist.ai', image: artunistCoverArtUrl },
+        { name: 'Waves', image: wavesAlbumCoverUrl },
+        { name: 'Sequences', image: tunesSequencesImageSvg },
+        { name: 'Lyrics for Tunes', image: tunesLyricsImageUrl },
+      ],
     }
   }
 
