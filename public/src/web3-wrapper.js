@@ -79,7 +79,6 @@ export default class Web3Wrapper {
     const tuneOfficialMetaData = await this._getTuneOfficialMetaData(tuneId);
     const tunesSong = await this._getTunesSong(tuneId);
     const artunistCoverArtUrl = 'https://ipfs.io/ipfs/Qmcu552EPV98N9vi96sGN72XJCeBF4n7jC5XtA1h3HF5kC/' + tuneId + '-composite.png';
-    //TODO add boilerplate for ordered array of images & audio to return, show which derivs we need to fetch
 
     return {
       "name": tuneOfficialMetaData.name,
@@ -111,13 +110,13 @@ export default class Web3Wrapper {
       "artist": "TODO",
       "album": tunesSong.name,
       "audio": [
-        { name: 'Songs for Tunes', audio: tunesSong.animation_url },
+        { name: 'Songs for Tunes', audio: tunesSong.animation_url, siteUrl: 'https://songs.tunesproject.org/' },
       ],
       "images": [
-        { name: 'Artunist.ai', image: artunistCoverArtUrl },
-        { name: 'Waves', image: wavesAlbumCoverUrl },
-        { name: 'Sequences', image: tunesSequencesImageSvg },
-        { name: 'Lyrics for Tunes', image: tunesLyricsImageUrl },
+        { name: 'Artunist.ai', image: artunistCoverArtUrl, siteUrl: 'https://etherscan.io/address/0x64f57f8a514415526caa75b52ca12ba83416437c#writeContract' },
+        { name: 'Waves', image: wavesAlbumCoverUrl, siteUrl: 'https://wavesproject.io/' },
+        { name: 'Sequences', image: tunesSequencesImageSvg, siteUrl: 'https://www.sequencesnft.com/' },
+        { name: 'Lyrics for Tunes', image: tunesLyricsImageUrl, siteUrl: 'https://www.tlyrics.art/' },
       ],
     }
   }
