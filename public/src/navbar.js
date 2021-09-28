@@ -41,7 +41,8 @@ export default class Navbar {
     if (event && event.preventDefault) { event.preventDefault() }
 
     try {
-      const searchedTitle = document.getElementById('searchTuneIdInput').value;
+      const searchedTitle = document.getElementById('searchTuneIdInput').value.replaceAll(`'`, ``).replaceAll(`"`, ``);
+      console.log(`searched title: ${searchedTitle}`);
       const index = HardCodedSongTitles.getAllSongTitles().indexOf(searchedTitle);
       if (index === -1) {
         SharedHelper.displayMessage(`❌🙅 "${document.getElementById('searchTuneIdInput').value}" isn't a tunes song title. Make sure to click the suggestion, and try again.`)
