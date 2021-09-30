@@ -24,22 +24,13 @@
   color: rgb(249, 247, 244);
   background-color: rgb(6, 105, 201) !important;
 }
-/*.form-control-lg:focus {*/
-/*  color: rgb(196, 189, 180);*/
-/*  background-color: rgb(31, 34, 35);*/
-/*  border-color: rgb(6, 76, 153);*/
-/*  outline-color: initial;*/
-/*  box-shadow: rgba(6, 109, 220, 0.25) 0px 0px 0px 0.2rem;*/
-/*}*/
-/*.form-control-lg::-webkit-input-placeholder {*/
-/*  color: rgb(171, 163, 150);*/
-/*}*/
-/*.form-control-lg:disabled,*/
-/*.form-control-lg[readonly] {*/
-/*  background-color: rgb(43, 46, 47);*/
-/*}*/
-/*.form-control-lg-plaintext {*/
-/*  color: rgb(225, 221, 214);*/
-/*  background-color: transparent;*/
-/*  border-color: transparent;*/
-/*}*/
+
+.carousel-indicators {
+  top: 0!important;
+}
+
+.carousel-indicators li {
+  background-color: white;
+  position: relative;
+  margin-bottom: 0;
+}

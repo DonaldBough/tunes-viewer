@@ -97,27 +97,29 @@ export default class Web3Wrapper {
     const tuneOwner = await this._getTuneIDOwner(tuneId);
     const tuneOfficialMetaData = await this._getTuneOfficialMetaData(tuneId);
     const tunesSong = await this._getTunesSong(tuneId);
-    const artunistCoverArtUrl = 'https://ipfs.io/ipfs/Qmcu552EPV98N9vi96sGN72XJCeBF4n7jC5XtA1h3HF5kC/' + tuneId + '-composite.png';
-    const wavesAlbumCoverUrl = ''; //TODO
-    const tunesLyricsImageUrl = ''; //TODO
-    const tunesSequencesImageSvg = ''; //TODO
+    const artunistCoverArtUrl = `https://ipfs.io/ipfs/Qmcu552EPV98N9vi96sGN72XJCeBF4n7jC5XtA1h3HF5kC/${tuneId}-composite.png`;
+    const wavesCoverArtUrl = `https://gateway.pinata.cloud/ipfs/QmcU5VGwqsC4GNCypMqrdt7b71yyM4Aswpagq3RJ3ikXNr/${tuneId}.gif`;
+    const tunesLyricsImageUrl = `https://ipfs.io/ipfs/QmWyQsJ7b4GKwSQhCEBLQY2MmyKY9onrEuf1BW7Fdxvh3e/${tuneId}.png`; //TODO
+    const tunesSequencesImageSvg = await this._getSequenceCoverArt(tuneId);
+
+    const images = [
+      { name: 'Artunist.ai', image: artunistCoverArtUrl, website: 'https://etherscan.io/address/0x64f57f8a514415526caa75b52ca12ba83416437c#writeContract' },
+      { name: 'Waves', image: wavesCoverArtUrl, website: 'https://wavesproject.io/' },
+      { name: 'Lyrics for Tunes', image: tunesLyricsImageUrl, website: 'https://www.tlyrics.art/' },
+    ];
+    if (tunesSequencesImageSvg) {
+      images.push({ name: 'Sequences', image: tunesSequencesImageSvg, website: 'https://www.sequencesnft.com/' });
+    }
 
     return {
-      "name": tuneOfficialMetaData.name,
       "id": tuneId,
+      "name": tuneOfficialMetaData.name,
       "owner": tuneOwner,
       "ownerUrl": "https://opensea.io/" + tuneOwner,
-      "artist": "TODO",
-      "album": tunesSong.name,
-      "audio": [
-        { name: 'Songs for Tunes', audio: tunesSong.animation_url, siteUrl: 'https://songs.tunesproject.org/' },
+      "songs": [
+        { name: 'Songs for Tunes', songName: tunesSong.name, song: tunesSong.animation_url, website: 'https://songs.tunesproject.org/' },
       ],
-      "images": [
-        { name: 'Artunist.ai', image: artunistCoverArtUrl, siteUrl: 'https://etherscan.io/address/0x64f57f8a514415526caa75b52ca12ba83416437c#writeContract' },
-        { name: 'Waves', image: wavesAlbumCoverUrl, siteUrl: 'https://wavesproject.io/' },
-        { name: 'Sequences', image: tunesSequencesImageSvg, siteUrl: 'https://www.sequencesnft.com/' },
-        { name: 'Lyrics for Tunes', image: tunesLyricsImageUrl, siteUrl: 'https://www.tlyrics.art/' },
-      ],
+      "images": images,
     }
   }
 
@@ -174,6 +176,20 @@ export default class Web3Wrapper {
     catch (e) {
       ErrorMonitor.logError(e);
       return errorDefaults;
+    }
+  }
+
+  async _getSequenceCoverArt(tuneId) {
+    const errorDefaults = { image: null }
+
+    try {
+      const sequenceBase64 = await this.metadataContract.getOfficialMetadata('Sequence', tuneId);
+      const sequence = JSON.parse(atob(sequenceBase64.substring(29)));
+      return sequence.image;
+    }
+    catch (e) {
+      ErrorMonitor.logError(e);
+      return errorDefaults
     }
   }
 
