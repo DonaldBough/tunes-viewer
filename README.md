@@ -1,17 +1,24 @@
-# tune-in
-A radio for $TUNE songs from the ethereum blockchain. 
+# Overview
+The Tunes NFT (https://tunesproject.org/) was created as a way to inspire artists to make songs based off the AI generated song titles with each NFT. After artists began attaching songs to their Tune NFT as a derivative, we needed a way to listen to them.
 
-## Vision
+The Tunes Viewer allows anyone to view the songs, artwork, lyrics, and all other media attached to a Tune NFT, as well as let users share their collection of Tunes with a simple link.
+
+# Demo
+https://user-images.githubusercontent.com/5701552/156943540-8565e7c4-acd5-405b-b20b-a3fbcd169424.mp4
+
+Website is also live at https://tunes-viewer.web.app/
+
+# Vision
 A interactive pirate radio for Tune songs & portal to the creativity of the Tunes ecosystem.
 
-## Making Changes
+# Making Changes
 Project is using plain vanilla JS, bootstrap, Sentry.io (error monitoring), font awesome, and firebase. 
 
 To run the project, `cd` to the `public` folder, and run `npm run local` to have firebase run a local web server for you on port 5000 (localhost:5000)
 
 To deploy changes to the live website, make sure you're in the public folder like before and run `npm run deploy`
 
-## Implementation Ideas 
+# Implementation Ideas 
 @aeolus
 - As an initial MVP, only log in with metamask for people who own a tune NFT. 
 - We can host the music on IPFS. 
@@ -47,7 +54,7 @@ To deploy changes to the live website, make sure you're in the public folder lik
 - Acquisition of creators can be kickstarted by existing network of community then word of mouth / content sharing. This happens when creators believe in project or they sell an Original or Remix. Crypto/NFT knowledge will be a barrier for adoption here. Get new creator to remix a Tune asap (perhaps with collab with existing creator for knowledge transfer). Perhaps best Remix in cohort, voted by holders, get promoted to Original... "New creator remix battle"
 
 
-## @donaldbough thoughts for MVP
+# @donaldbough thoughts for MVP
 * MVP
     * play the song url associated with a tunes nft.
         * Only play sound cloud songs to start.
